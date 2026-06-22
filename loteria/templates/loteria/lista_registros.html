@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Registros - Lotería</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: #f5f5f5;
+        }
+        h1 { 
+            color: #333; 
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .container-acciones {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-primary:hover { background-color: #0056b3; }
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-success:hover { background-color: #218838; }
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+        .btn-danger:hover { background-color: #c82333; }
+        .btn-warning {
+            background-color: #ffc107;
+            color: #333;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+        .btn-warning:hover { background-color: #e0a800; }
+        
+        .info-cantidad {
+            background-color: #e7f3ff;
+            border-left: 4px solid #007bff;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        thead {
+            background-color: #007bff;
+            color: white;
+        }
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+        .acciones {
+            display: flex;
+            gap: 8px;
+        }
+        .id-registro {
+            color: #666;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .sin-registros {
+            text-align: center;
+            padding: 40px;
+            background-color: white;
+            border-radius: 4px;
+            color: #666;
+        }
+        .sin-registros p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📋 Registros de Lotería</h1>
+
+    <div class="container-acciones">
+        <a href="{% url 'loteria:registrar' %}" class="btn btn-success">✏️ Nuevo Registro</a>
+    </div>
+
+    {% if cantidad > 0 %}
+        <div class="info-cantidad">
+            <strong>Total de registros:</strong> {{ cantidad }}
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Número de Lotería</th>
+                    <th>Fecha del Sorteo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for registro in registros %}
+                    <tr>
+                        <td class="id-registro">#{{ registro.id }}</td>
+                        <td><strong>{{ registro.numero }}</strong></td>
+                        <td>{{ registro.fecha|date:"d/m/Y" }}</td>
+                        <td>
+                            <div class="acciones">
+                                <a href="{% url 'loteria:editar' registro.id %}" class="btn btn-warning">Editar</a>
+                                <a href="{% url 'loteria:eliminar' registro.id %}" class="btn btn-danger">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <div class="sin-registros">
+            <p>❌ No hay registros de lotería.</p>
+            <p>
+                <a href="{% url 'loteria:registrar' %}" class="btn btn-success">Crear el Primer Registro</a>
+            </p>
+        </div>
+    {% endif %}
+
+</body>
+</html>

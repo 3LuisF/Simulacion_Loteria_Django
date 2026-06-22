@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Registro - Lotería</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 0 20px;
+            background-color: #f5f5f5;
+        }
+        h1 { 
+            color: #333; 
+            border-bottom: 3px solid #ffc107;
+            padding-bottom: 10px;
+        }
+        .form-group { margin-bottom: 20px; }
+        label { 
+            display: block; 
+            font-weight: bold; 
+            margin-bottom: 5px; 
+            color: #333;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: #ffc107;
+            box-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+        }
+        .info-registro {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .acciones-formulario {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        .btn {
+            flex: 1;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-primary:hover { background-color: #0056b3; }
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        .btn-secondary:hover { background-color: #5a6268; }
+        .errorlist { 
+            color: red; 
+            list-style: none; 
+            padding: 0;
+            margin: 5px 0;
+        }
+        .errorlist li {
+            margin: 3px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>✏️ Editar Registro de Lotería</h1>
+
+    <div class="info-registro">
+        <strong>Registro ID:</strong> #{{ registro.id }}<br>
+        <strong>Creado/Modificado:</strong> {{ registro|date:"d/m/Y" }}
+    </div>
+
+    <!-- El atributo 'action' vacío envía al mismo URL actual -->
+    <!-- 'method="post"' indica que los datos se envían de forma segura -->
+    <form method="post" action="">
+
+        <!-- Token de seguridad OBLIGATORIO en todo formulario POST de Django -->
+        {% csrf_token %}
+
+        <!-- Iteramos cada campo del formulario -->
+        {% for field in form %}
+            <div class="form-group">
+
+                <!-- Etiqueta del campo (viene del verbose_name del modelo) -->
+                {{ field.label_tag }}
+
+                <!-- El campo en sí (input, select, etc.) -->
+                {{ field }}
+
+                <!-- Errores de validación (aparecen si el campo tiene datos inválidos) -->
+                {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+            </div>
+        {% endfor %}
+
+        <div class="acciones-formulario">
+            <button type="submit" class="btn btn-primary">💾 Guardar Cambios</button>
+            <a href="{% url 'loteria:listar' %}" class="btn btn-secondary">❌ Cancelar</a>
+        </div>
+
+    </form>
+
+</body>
+</html>

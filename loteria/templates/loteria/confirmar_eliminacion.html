@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Eliminación - Lotería</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 0 20px;
+            background-color: #f5f5f5;
+        }
+        .contenedor-confirmacion {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .icono-alerta {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #dc3545;
+            margin: 10px 0;
+            font-size: 28px;
+        }
+        .mensaje {
+            color: #666;
+            font-size: 16px;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+        .detalles-registro {
+            background-color: #fff3cd;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            text-align: left;
+        }
+        .detalles-registro p {
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .detalles-registro strong {
+            color: #333;
+        }
+        .acciones-confirmacion {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            flex: 1;
+            max-width: 200px;
+        }
+        .btn-danger:hover { 
+            background-color: #c82333;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            flex: 1;
+            max-width: 200px;
+        }
+        .btn-secondary:hover { 
+            background-color: #5a6268;
+        }
+        .advertencia {
+            color: #dc3545;
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-confirmacion">
+        <div class="icono-alerta">⚠️</div>
+
+        <h1>¿Estás seguro?</h1>
+
+        <div class="mensaje">
+            <p>Estás a punto de eliminar este registro de lotería.</p>
+            <p>Esta acción <strong>no se puede deshacer</strong>.</p>
+        </div>
+
+        <div class="detalles-registro">
+            <p><strong>ID del Registro:</strong> #{{ registro.id }}</p>
+            <p><strong>Número de Lotería:</strong> {{ registro.numero }}</p>
+            <p><strong>Fecha del Sorteo:</strong> {{ registro.fecha|date:"d/m/Y" }}</p>
+        </div>
+
+        <div class="advertencia">
+            ⚡ Esta acción es permanente y no se puede recuperar.
+        </div>
+
+        <form method="post" action="">
+            {% csrf_token %}
+
+            <div class="acciones-confirmacion">
+                <button type="submit" class="btn btn-danger">🗑️ Eliminar Definitivamente</button>
+                <a href="{% url 'loteria:listar' %}" class="btn btn-secondary">❌ Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
