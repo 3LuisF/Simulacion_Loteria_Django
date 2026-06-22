@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro Exitoso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 60px auto;
+            text-align: center;
+        }
+        .exito { color: #28a745; font-size: 48px; }
+        h1 { color: #333; }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        a:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+
+    <p class="exito">?</p>
+    <h1>¡Registro Exitoso!</h1>
+    <p>El número de lotería fue guardado correctamente.</p>
+
+    <!-- 'url' genera automáticamente la URL correcta según el nombre definido en urls.py -->
+    <a href="{% url 'loteria:registrar' %}">Registrar otro número</a>
+
+</body>
+</html>

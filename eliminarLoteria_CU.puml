@@ -1,0 +1,54 @@
+@startuml
+title Especificación de Caso de Uso — Aplicación de Registro de Números de Lotería
+
+note as EspCU
+== Información General ==
+| **Campo** | **Descripción** |
+| Identificador | CU-LT-04 |
+| Nombre | Eliminar registro de lotería |
+| Objetivo | Permitir eliminar un registro almacenado en el sistema. |
+| Descripción | El usuario selecciona un registro existente y confirma su eliminación permanente. |
+| Actor Principal | Usuario |
+| Actores Secundarios | Sistema de Registro de Lotería |
+| Prioridad | Media |
+| Frecuencia de Uso | Baja |
+| Nivel | Objetivo de usuario |
+| Tipo | Eliminación |
+
+== Precondiciones ==
+1. Debe existir al menos un registro almacenado.
+2. El registro seleccionado debe existir.
+
+== Disparador ==
+El usuario selecciona la opción "Eliminar Registro".
+
+== Flujo Principal ==
+| **Paso** | **Acción** |
+| 1 | El usuario selecciona un registro existente. |
+| 2 | El sistema muestra la información del registro seleccionado. |
+| 3 | El sistema solicita confirmación de eliminación. |
+| 4 | El usuario confirma la operación. |
+| 5 | El sistema elimina el registro de la base de datos. |
+| 6 | El sistema muestra mensaje de eliminación exitosa. |
+| 7 | Finaliza el caso de uso. |
+
+== Flujos Alternativos ==
+| **ID** | **Descripción** |
+| FA-01 | El usuario cancela la operación antes de confirmar la eliminación. |
+
+== Flujos de Excepción ==
+| **ID** | **Descripción** |
+| FE-01 | El registro no existe. |
+| FE-02 | Ocurre un error durante la eliminación. |
+| FE-03 | Se pierde la conexión con la base de datos. |
+
+== Postcondiciones ==
+1. El registro deja de existir en la base de datos.
+2. El listado de registros se actualiza.
+
+== Reglas de Negocio ==
+| **ID** | **Regla** |
+| RN-01 | La eliminación requiere confirmación explícita del usuario. |
+| RN-02 | Solo pueden eliminarse registros existentes. |
+end note
+@enduml

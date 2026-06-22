@@ -1,0 +1,56 @@
+@startuml
+title Especificación de Caso de Uso — Aplicación de Registro de Números de Lotería
+
+note as EspCU
+== Información General ==
+| **Campo** | **Descripción** |
+| Identificador | CU-LT-03 |
+| Nombre | Actualizar registro de lotería |
+| Objetivo | Permitir modificar la información de un registro existente. |
+| Descripción | El usuario selecciona un registro previamente almacenado y actualiza el número de lotería y/o la fecha del sorteo. |
+| Actor Principal | Usuario |
+| Actores Secundarios | Sistema de Registro de Lotería |
+| Prioridad | Media |
+| Frecuencia de Uso | Media |
+| Nivel | Objetivo de usuario |
+| Tipo | Actualización |
+
+== Precondiciones ==
+1. Debe existir al menos un registro almacenado.
+2. El registro seleccionado debe existir en la base de datos.
+
+== Disparador ==
+El usuario selecciona la opción "Editar Registro".
+
+== Flujo Principal ==
+| **Paso** | **Acción** |
+| 1 | El usuario selecciona un registro existente. |
+| 2 | El sistema muestra la información actual del registro. |
+| 3 | El usuario modifica el número de lotería y/o la fecha del sorteo. |
+| 4 | El sistema valida la información ingresada. |
+| 5 | El usuario confirma la actualización. |
+| 6 | El sistema guarda los cambios en la base de datos. |
+| 7 | El sistema muestra mensaje de actualización exitosa. |
+| 8 | Finaliza el caso de uso. |
+
+== Flujos Alternativos ==
+| **ID** | **Descripción** |
+| FA-01 | El usuario modifica únicamente la fecha del sorteo. |
+| FA-02 | El usuario modifica únicamente el número de lotería. |
+
+== Flujos de Excepción ==
+| **ID** | **Descripción** |
+| FE-01 | El registro seleccionado no existe. |
+| FE-02 | Los datos ingresados no cumplen las validaciones del formulario. |
+| FE-03 | Ocurre un error al guardar los cambios. |
+
+== Postcondiciones ==
+1. El registro queda actualizado.
+2. La información anterior es reemplazada por los nuevos valores.
+
+== Reglas de Negocio ==
+| **ID** | **Regla** |
+| RN-01 | El número de lotería debe ser un entero positivo. |
+| RN-02 | La fecha debe corresponder a una fecha válida. |
+end note
+@enduml

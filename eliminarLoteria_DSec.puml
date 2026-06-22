@@ -1,0 +1,34 @@
+@startuml
+title CU-LT-04: Eliminar registro de lotería (Flujo Principal)
+
+actor Usuario
+participant "Sistema de Registro" as Sistema
+database "Base de Datos" as BD
+
+== Inicio del Caso de Uso ==
+
+autonumber
+Usuario -> Sistema : Selecciona un registro existente
+activate Sistema
+
+Sistema --> Usuario : Muestra la información del registro seleccionado
+deactivate Sistema
+
+Usuario -> Sistema : Solicita la eliminación del registro
+activate Sistema
+
+Sistema --> Usuario : Solicita confirmación de eliminación
+
+Usuario -> Sistema : Confirma la operación
+
+Sistema -> BD : Elimina el registro de la base de datos
+activate BD
+
+BD --> Sistema : Confirmación de registro eliminado
+deactivate BD
+
+Sistema --> Usuario : Muestra mensaje de eliminación exitosa
+deactivate Sistema
+
+== Fin del Caso de Uso ==
+@enduml

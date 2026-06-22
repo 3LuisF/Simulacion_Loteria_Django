@@ -1,0 +1,53 @@
+@startuml
+title Especificación de Caso de Uso — Aplicación de Registro de Números de Lotería
+
+note as EspCU
+== Información General ==
+| **Campo** | **Descripción** |
+| Identificador | CU-LT-02 |
+| Nombre | Listar registros de lotería |
+| Objetivo | Permitir visualizar los registros de números de lotería almacenados en el sistema. |
+| Descripción | El usuario consulta el listado de registros existentes mostrando número de lotería y fecha del sorteo. |
+| Actor Principal | Usuario |
+| Actores Secundarios | Sistema de Registro de Lotería |
+| Prioridad | Alta |
+| Frecuencia de Uso | Alta |
+| Nivel | Objetivo de usuario |
+| Tipo | Consulta |
+
+== Precondiciones ==
+1. Deben existir registros almacenados en la base de datos.
+2. El sistema debe estar disponible.
+
+== Disparador ==
+El usuario selecciona la opción "Consultar Registros".
+
+== Flujo Principal ==
+| **Paso** | **Acción** |
+| 1 | El usuario accede al módulo de consulta. |
+| 2 | El sistema consulta los registros almacenados. |
+| 3 | El sistema recupera la información de la base de datos. |
+| 4 | El sistema muestra la lista de números registrados junto con su fecha de sorteo. |
+| 5 | El usuario visualiza la información. |
+| 6 | Finaliza el caso de uso. |
+
+== Flujos Alternativos ==
+| **ID** | **Descripción** |
+| FA-01 | El usuario ordena los registros por fecha. |
+| FA-02 | El usuario ordena los registros por número de lotería. |
+
+== Flujos de Excepción ==
+| **ID** | **Descripción** |
+| FE-01 | No existen registros almacenados. |
+| FE-02 | Ocurre un error de conexión con la base de datos. |
+
+== Postcondiciones ==
+1. La información solicitada queda visualizada.
+2. No se realizan modificaciones sobre los datos.
+
+== Reglas de Negocio ==
+| **ID** | **Regla** |
+| RN-01 | Solo se mostrarán registros almacenados válidamente. |
+| RN-02 | La información mostrada debe corresponder a los datos existentes en la base de datos. |
+end note
+@enduml

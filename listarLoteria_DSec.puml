@@ -1,0 +1,26 @@
+@startuml
+title CU-LT-02: Listar registros de lotería (Flujo Principal)
+
+actor Usuario
+participant "Sistema de Registro" as Sistema
+database "Base de Datos" as BD
+
+== Inicio del Caso de Uso ==
+
+autonumber
+Usuario -> Sistema : Accede al módulo de consulta
+activate Sistema
+
+Sistema -> BD : Consulta los registros almacenados
+activate BD
+
+BD --> Sistema : Recupera la información de la base de datos
+deactivate BD
+
+Sistema --> Usuario : Muestra la lista de números y fechas de sorteo
+deactivate Sistema
+
+Usuario -> Usuario : Visualiza la información
+
+== Fin del Caso de Uso ==
+@enduml
